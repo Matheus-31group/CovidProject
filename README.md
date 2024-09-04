@@ -80,3 +80,12 @@ A análise dos dados da covid foram realizadas em cima da camada gold e analisad
 
 As recomendações de segurança e monitoramento estão descritas em dois notebooks "Estratégias de monitoramento" e "Implementação de medidas de segurança", na pasta **Notebooks**.
 
+* Observações:
+
+Análise de dados: Não consegui finalizar a análise dos dados como gostaria devido ao tempo limitado. Optei por focar nas partes mais desafiadoras tecnicamente para priorizar mostrar meu conhecimento em lógica e implementação. No ambiente de trabalho, entregaria sem problemas essas análises com a qualidade esperada. Embora a análise de dados seja algo que eu faço com facilidade, decidi priorizar a entrega das partes mais complexas. Se necessário, posso compartilhar uma análise de negócio similar que já fiz em Python, com insights estatísticos e visualizações.
+
+Uso do Databricks Community: Como usei a versão Community do Databricks, parte da documentação está documentada e hospedada na plataforma que acabam não vindo para o Github.
+
+Uso do IA: Em razão do tempo, utilizei como apoio apenas o chatGPT para me apoiar na escrita da documentação, gerando textos revisados a partir dos meus rascunhos. Cabe destacar que toda a solução, ideia e implementação foram minhas, baseado em experiência, pesquisa e lógica.
+
+GitHub: Devido a imprevistos, acabei utilizando uma conta diferente do GitHub para este projeto. Algumas explicações podem ter ficado sem subir, mas são detalhes que posso esclarecer sem problemas.
