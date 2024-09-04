@@ -1,8 +1,8 @@
 # Projeto de Engenharia de Dados - ETL de Dados da COVID-19
 
-## Descrição do Projeto
+Este projeto implementa um pipeline de ETL para processar dados de COVID-19 usando Python, SQL e Databricks. Ele segue a arquitetura Medallion (Bronze, Silver, Gold) para extrair, transformar e carregar os dados, proporcionando análises e insights a partir de uma base pública de dados dentro da plataforma do Databricks.
 
-Este projeto foi desenvolvido para uma agência governamental de dados com o objetivo de projetar e implementar um pipeline de ETL (Extract, Transform, Load) que processa os dados de COVID-19 disponíveis publicamente. Utilizei a plataforma **Databricks** para extrair, transformar, carregar e realizar análises sumárias dos dados, gerando insights sobre o impacto da pandemia por região.
+## Descrição do Projeto
 
 Os dados utilizados são provenientes de [COVID-19 Open Data](https://storage.googleapis.com/covid19-open-data/v3/latest/aggregated.csv), uma base pública que fornece informações agregadas sobre casos de COVID-19.
 
@@ -33,3 +33,50 @@ A camada Gold entrega um conjunto de dados final altamente otimizado para análi
 ### 4. Carga e Armazenamento
 
 Os dados transformados em cada camada (Bronze, Silver, e Gold) são carregados no Databricks usando o formato **Delta Lake**, que oferece eficiência em consultas, suporte a versionamento e auditoria de alterações, além de escalabilidade para grandes volumes de dados.
+
+## Implementação do Pipeline
+
+O pipeline foi implementado no Databricks utilizando notebooks, seguindo a arquitetura Medallion, que é uma abordagem comum para gestão dos dados dentro da plataforma. A arquitetura organiza os dados, geralmente, em três camadas distintas:
+
+- Camada Bronze: Armazena os dados brutos, exatamente como foram ingeridos.
+- Camada Silver: Processa e limpa os dados, preparando-os para análise.
+- Camada Gold: Contém os dados refinados e otimizados, prontos para uso em relatórios e análises de negócios.
+
+Essas camadas variam de acordo com as necessidades do negócio. Como utilizei a versão Community do Databricks, algumas funcionalidades não estavam disponíveis, mas a execução do pipeline pode ser facilmente orquestrada com o Data Factory ou utilizando Jobs no Databricks.
+
+Os notebooks que realizam a ingestão e o tratamento dos dados estão disponíveis na pasta "Data Ingest".
+
+
+## Armazenamento na Plataforma Databricks
+a. Escolha do Formato de Armazenamento
+O formato de armazenamento escolhido para os dados transformados foi o Delta Lake, implementado em todas as camadas (Bronze, Silver e Gold). Esse formato foi utilizado para garantir a integridade e eficiência no processamento dos dados ao longo do pipeline ETL.
+
+b. Justificativa do Formato e Suporte para Consultas
+Optei por Delta Lake principalmente por suas características que atendem às demandas do pipeline implementado no Databricks:
+
+- Escalabilidade
+- Eficiência
+- Controle
+
+
+Por que não optei por outros formatos:
+
+**Parquet**
+Embora o Parquet ofereça armazenamento eficiente e compactado, não possui suporte nativo a transações ACID nem controle de versão. Isso limita sua capacidade de gerenciar atualizações de dados e auditorias ao longo do tempo. Aqui é importante destacar que ele pode ser uma ótima escolha para o projeto, mas dependendo da complexidade e necessidades, o delta é mais indicado.
+
+**CSV**
+O formato CSV é simples e legível, mas é ineficiente para grandes volumes de dados, além de não ser otimizado para consultas analíticas. Ele também não oferece compressão ou suporte a esquemas complexos.
+
+**Avro**
+Avro é uma boa opção para ingestão de dados em tempo real e dados de streaming, mas não é otimizado para análises em larga escala, que são fundamentais para a camada Gold do pipeline. 
+
+Observação: os dados foram armazenados no DBFS especificamente para o caso desse projeto, mas uma opção é utilizar diretórios no Data Lake da Azure para armazenamento dos dados de cada camada, o que também pode ajudar na redução de custos.
+
+## Análise de dados
+
+A análise dos dados da covid foram realizadas em cima da camada gold e analisadas em SQL, conforme o notebook "Covid Analysis" na pasta **Notebooks**.
+
+## Implementações de segurança e monitoramento
+
+As recomendações de segurança e monitoramento estão descritas em dois notebooks "Estratégias de monitoramento" e "Implementação de medidas de segurança", na pasta **Notebooks**.
+
